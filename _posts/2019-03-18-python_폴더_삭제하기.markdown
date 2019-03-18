@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "python으로 폴더 삭제하기"
+date:   2019-03-18 22:51:00
+categories: Python shutil folder
+---
+
+ 
+  
+   
+### Python을 활용한 재미난 것들 #2
+#### 특정 시점 이전의 폴더를 삭제하기
+
+파일 서버를 정리해야 하는데, 특정 시점 이전의 폴더만 삭제해야 하는 경우가 발생했다.
+파일 탐색기에서 일자를 정렬해서 삭제하기에는 반복 작업이기도 하고, 실수의 여지가 있다.
+
+
+``` python
+  import os, shutil
+  from datetime import datetime
+  
+  path = "D:/python/Deletion"
+  os.chdir(path)
+  dir_list = os.listdir(path)
+  set_time = datetime(2019, 3, 18, 22, 51, 00)
+
+  for dirName in dir_list:
+    mod_time = datetime.fromtimestamp(os.path.getmtime(dirName))
+    if (os.path.isdir(dirName) & (mod_time < set_time)):
+      print(dirName)
+      shutil.rmtree(fileName)
+```
+
+
+* 설정된 시간 (set_time) 보다 이전에 작성된 폴더의 경우에는 반복문을 통해 삭제한다.
+* 폴더가 아닌, 파일이면 삭제하지 않는다.
