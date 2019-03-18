@@ -7,8 +7,8 @@ highlighter: pygments
 logo: false
 paginate: 15
 baseurl: /
-domain_name: 'http://yourblog-domain.com'
-google_analytics: 'UA-XXXXXXXX-X'
+domain_name: 'https://fernweh6990.github.io'
+google_analytics: 'UA-136422308-1'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
