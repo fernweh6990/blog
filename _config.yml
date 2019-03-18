@@ -1,6 +1,6 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: OBSSE
+description: To be obsessive person
+meta_description: "No obsessive, no successful"
 
 markdown: kramdown
 highlighter: rouge
@@ -12,5 +12,5 @@ google_analytics: 'UA-136422308-1'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
-url:            'https://github.com/fernweh6990/blog'
+url:            'https://fernweh6990.github.io'
 author:         'Hyunsu'
