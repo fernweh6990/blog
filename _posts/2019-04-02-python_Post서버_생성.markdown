@@ -24,45 +24,37 @@ from io import BytesIO
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
-'''
-def do_GET(self):
-self.send_response(200)
-self.end_headers()
-self.wfile.write(b'Hello, world!')
-'''
 
 def do_POST(self):
 demo_data = '''
-[
-{
-"data1": "aaa",
-"data2": "111",
-"data3": "xxx"
-},
-{
-"data1": "bbb",
-"data2": "222",
-"data3": "yyy"
-}
-]
+ [
+ {
+ "data1": "aaa",
+ "data2": "111",
+ "data3": "xxx"
+ },
+ {
+ "data1": "bbb",
+ "data2": "222",
+ "data3": "yyy"
+ }
+ ]
 '''
 
-content_length = int(self.headers['Content-Length'])
-body = self.rfile.read(content_length)
-self.send_response(200)
-self.send_header("Content-Type","application/json;charset=UTF-8")
-self.end_headers()
-response = BytesIO()
+ content_length = int(self.headers['Content-Length'])
+ body = self.rfile.read(content_length)
+ self.send_response(200)
+ self.send_header("Content-Type","application/json;charset=UTF-8")
+ self.end_headers()
+ response = BytesIO()
 
-response.write(str.encode(demo_data))
-self.wfile.write(response.getvalue())
+ response.write(str.encode(demo_data))
+ self.wfile.write(response.getvalue())
 
-
-httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
-httpd.serve_forever()
+ # 8000 포트로 서버 동작
+ httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
+ httpd.serve_forever()
 
 
 ```
 
-
-* 수신 port는 default인 80이다.
