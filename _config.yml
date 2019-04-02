@@ -14,3 +14,5 @@ gems: [jekyll-paginate]
 # Details for the RSS feed generator
 url:            'https://fernweh6990.github.io'
 author:         'Hyunsu'
+
+timezone: "Asia/Seoul"
