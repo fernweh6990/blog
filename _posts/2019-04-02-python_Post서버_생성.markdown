@@ -52,8 +52,8 @@ demo_data = '''
  self.wfile.write(response.getvalue())
 
  # 8000 포트로 서버 동작
- httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
- httpd.serve_forever()
+httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
+httpd.serve_forever()
 
 
 ```
