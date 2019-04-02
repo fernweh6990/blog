@@ -25,35 +25,36 @@ from io import BytesIO
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
-def do_POST(self):
-demo_data = '''
- [
- {
- "data1": "aaa",
- "data2": "111",
- "data3": "xxx"
- },
- {
- "data1": "bbb",
- "data2": "222",
- "data3": "yyy"
- }
- ]
-'''
+    def do_POST(self):
+        demo_data = '''
+         [
+         {
+         "data1": "aaa",
+         "data2": "111",
+         "data3": "xxx"
+         },
+         {
+         "data1": "bbb",
+         "data2": "222",
+         "data3": "yyy"
+         }
+         ]
+        '''
 
- content_length = int(self.headers['Content-Length'])
- body = self.rfile.read(content_length)
- self.send_response(200)
- self.send_header("Content-Type","application/json;charset=UTF-8")
- self.end_headers()
- response = BytesIO()
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+        self.send_response(200)
+        self.send_header("Content-Type","application/json;charset=UTF-8")
+        self.end_headers()
+        response = BytesIO()
 
- response.write(str.encode(demo_data))
- self.wfile.write(response.getvalue())
+        response.write(str.encode(demo_data))
+        self.wfile.write(response.getvalue())
 
  # 8000 포트로 서버 동작
 httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
 httpd.serve_forever()
+
 
 
 ```
