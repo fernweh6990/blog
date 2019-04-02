@@ -16,17 +16,18 @@ categories: Python pandas excel
 
 
 ``` python
-  import glob, os
-  import pandas as pd
+import glob, os
+import pandas as pd
 
-  files = glob.glob(os.path.dirname(os.path.abspath(__file__))+"\\*.xlsx")
 
-  for file_name in files:
-  
-  data = pd.read_excel( file_name, sheet_name=0 , dtype=str)
-  data = data.replace('nan', '')
-  # xlsx 파일과 동일한 이름으로 txt 파일 생성
-  data.to_csv(file_name.replace('.xlsx','.txt'), sep=',', index=False)
+files = glob.glob(os.path.dirname(os.path.abspath(__file__))+"\\*.xlsx")
+
+for file_name in files:
+    data = pd.read_excel( file_name, sheet_name=0 , dtype=str)
+    data = data.replace('nan', '')
+    # xlsx 파일과 동일한 이름으로 txt 파일 생성
+    data.to_csv(file_name.replace('.xlsx','.txt'), sep=',', index=False)
+
 ```
 
 
