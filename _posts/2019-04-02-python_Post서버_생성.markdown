@@ -8,7 +8,7 @@ categories: Python post server
  
   
    
-### Python으로 Post 서버 만들기
+### python으로 Post 서버 만들기
 #### Post request를 수신하고, json response 하는 서버
 
 서버간 통신하는 API를 개발하는 중에, 상대 서버와 아직 통신할 수 없는 상황이었다.
