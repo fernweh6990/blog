@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ython으로 Post 서버 만들기"
+title:  "python으로 Post 서버 만들기"
 date:   2019-04-02 20:20:00
 categories: Python post server
 ---
