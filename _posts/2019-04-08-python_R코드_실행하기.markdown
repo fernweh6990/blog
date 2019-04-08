@@ -1,0 +1,53 @@
+---
+layout: post
+title:  "Python에서 R 코드 실행하기"
+date:   2019-04-08 23:20:00
+categories: Python rpy2 R
+---
+
+
+Python에서 연산한 값으로 R로 데이터를 넘겨 그래프 그릴 경우가 있었다.
+다만 Dataframe에 대한 이해도가 부족해서 우선 R에서 CSV 파일 값을 읽어오도록 했다.
+이렇게 하니, 단순히 Python에서 R을 원격으로 수행하는 역할 밖에 되지 않는 아쉬움이...
+
+우선 Python에서 R을 호출하는 코드만 기록해 놓는다.
+
+
+
+``` python
+import rpy2.robjects as robjects
+
+rQuery = """
+    df <- read.table(text = "", colClasses = c("Date", "integer","character"), col.names = c("time", "count","server"));
+    df_max <- read.table(text = "", colClasses = c("Date", "integer","character"), col.names = c("time", "count","server"));
+    outPath= dir(path="D:/python/log", pattern="output.csv$", full.names = FALSE);
+    for(filepath in outPath){
+			data <- read.csv(file.path('D:/Python/log/',filepath),header=T);
+			df_max <- rbind(df_max,data[which.max(data$count),]);
+			df <- rbind(df,data);
+    }
+    df_max <- subset(df_max, mux=="server1");
+    df$time <- as.POSIXct(df$time);
+    df_max$time <- as.POSIXct(df_max$time);
+    library(ggplot2);
+
+    myplot <- ggplot() + geom_point(data = df, aes(x=time, y=userCnt, color=server), size=0.1) + theme(axis.text.x=element_text(size=rel(1))) + geom_text(data = df_max, aes(x=time, y=count, label = count), hjust = 0.5, vjust = -1) + scale_x_datetime(breaks='1 day', date_labels = '%D');
+    ggsave(filename="D:/python/myplot.png", width = 10, height = 5)
+    """
+
+
+robjects.r(rQuery)
+
+os.startfile('D:/python/myplot.png')
+
+```
+
+
+* CSV에는 time, count, 서버 명의 세 항목이 있다.
+* df는 그래프를 그리는데 사용하고(geom_point), df_max는 일별 최대값을 그래프에 숫자로 표시하는데(geom_text) 사용된다.
+* 쿼리를 짜놓고, 수행만 하면 되는 구조이다. 
+* 당연히 R은 설치되어 있어야 한다. 만약, 환경 변수 관련 오류가 발생하면, 환경변수를 수행 전에 명시하면 된다.
+```python
+os.environ['R_USER'] = 'C:\\Users\\Hyunsu\\Documents'
+
+```
