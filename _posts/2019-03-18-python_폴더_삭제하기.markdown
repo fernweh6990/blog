@@ -27,10 +27,10 @@ setTime = datetime(2019, 4, 1, 00, 00, 00)
 for fileName in glob.glob(del_path+"\\**", recursive=True):
     modTime = datetime.fromtimestamp(os.path.getmtime(fileName))
     if ((not os.path.isdir(fileName)) & (modTime < setTime)):
-        print(fileName)
+        os.remove(fileName)
 
 ```
 
 
-* 설정된 시간 (set_time) 보다 이전에 작성된 폴더의 경우에는 반복문을 통해 삭제한다.
+* 설정된 시간 (setTime) 보다 이전에 작성된 폴더의 경우에는 반복문을 통해 삭제한다.
 * 폴더가 아닌, 파일이면 삭제하지 않는다.
