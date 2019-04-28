@@ -33,4 +33,4 @@ for fileName in glob.glob(del_path+"\\**", recursive=True):
 
 
 * 설정된 시간 (setTime) 보다 이전에 작성된 폴더의 경우에는 반복문을 통해 삭제한다.
-* 폴더가 아닌, 파일이면 삭제하지 않는다.
+* 파일이 아닌, 파일이면 삭제하지 않는다.
