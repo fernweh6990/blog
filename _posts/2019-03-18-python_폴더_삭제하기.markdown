@@ -16,19 +16,18 @@ categories: Python shutil folder
 
 
 ``` python
-import os, shutil
+import os, glob
 from datetime import datetime
-  
-path = "D:/python/Deletion"
-os.chdir(path)
-dir_list = os.listdir(path)
-set_time = datetime(2019, 3, 18, 22, 51, 00)
 
-for dirName in dir_list:
-    mod_time = datetime.fromtimestamp(os.path.getmtime(dirName))
-    if (os.path.isdir(dirName) & (mod_time < set_time)):
-        print(dirName)
-        shutil.rmtree(fileName)
+print("start!")
+
+del_path = "D:/python/Deletion"
+setTime = datetime(2019, 4, 1, 00, 00, 00)
+
+for fileName in glob.glob(del_path+"\\**", recursive=True):
+    modTime = datetime.fromtimestamp(os.path.getmtime(fileName))
+    if ((not os.path.isdir(fileName)) & (modTime < setTime)):
+        print(fileName)
 
 ```
 
